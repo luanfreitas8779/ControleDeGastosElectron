@@ -8,7 +8,6 @@ const path = require('path')
 // Importação dos IPCs
 const ipcGasto = require('./ipc/gasto.ipc.js')
 const ipcCategoria = require('./ipc/categoria.ipc.js')
-const ipcRecorrente = require('./ipc/recorrente.ipc.js')
 const ipcVenda = require('./ipc/venda.ipc.js')
 const ipcUsuario = require('./ipc/usuario.ipc.js')
 const ipcDashboard = require('./ipc/dashboardResumo.ipc.js')

@@ -18,7 +18,6 @@
     "start": "electron-forge start",
     "dev": "cross-env NODE_ENV=development electron .",
     "test": "jest",
-    "seed": "electron seed.js",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "dist": "electron-builder --win"

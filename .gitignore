@@ -98,6 +98,18 @@ dist
 # Sveltekit cache directory
 .svelte-kit/
 
+# Electron specific
+.DS_Store
+Thumbs.db
+*.db
+.vscode/
+.cursor/
+
+# Additional security
+.env.local
+.env.production
+.env.development
+
 # vitepress build output
 **/.vitepress/dist
 
