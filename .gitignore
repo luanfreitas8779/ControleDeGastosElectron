@@ -177,3 +177,6 @@ dist/
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+# Pasta de configuração do cursor
+.cursor/
