@@ -1,0 +1,39 @@
+description: Stack, versions and best practices for the Electron expenses control project
+alwaysApply: true
+---
+
+## Project Stack
+
+- **Desktop app**: Electron `^40.6.1` (`electron .`)
+- **JS runtime**: Node in `commonjs` mode (`"type": "commonjs"`)
+- **Database**: SQLite via `better-sqlite3` `^12.6.2`
+- **Auth/Security**: `bcryptjs` `^3.0.3` for password hashing
+- **Charts in frontend**: `chart.js` `^4.5.1`
+- **Development tooling**:
+  - `cross-env` `^10.1.0` to define `NODE_ENV`
+  - `electron-reload` `^2.0.0-alpha.1` for live reload in development
+  - `electron-rebuild` `^3.2.9` to rebuild native modules when necessary
+
+## Best Practices for This Stack
+
+- **Electron structure**
+  - Keep system/IO logic only in the `main` process and use IPC/preload to expose safe APIs to the renderer.
+  - Avoid enabling `nodeIntegration` in BrowserWindows; use `preload.js` and dedicated IPC channels instead.
+  - Clearly separate layers: controllers/services/models/frontend to keep the codebase organized.
+
+- **SQLite (`better-sqlite3`)**
+  - Use a single reusable database connection instance instead of opening/closing the DB repeatedly.
+  - Handle database errors and write clear logs to make debugging easier.
+  - Avoid versioning `.db` files for production; use them only as development data or backups.
+
+- **Passwords with `bcryptjs`**
+  - Always store only the hash, never the plain-text password.
+  - Use a consistent cost factor across the project and avoid reimplementing password comparison logic.
+
+- **Chart.js in the frontend**
+  - Centralize default chart configuration (colors, fonts, locale) to keep visuals consistent.
+  - Update chart data by reusing chart instances whenever possible instead of recreating charts unnecessarily.
+
+- **Environment and scripts**
+  - Use `npm run dev` (with `cross-env NODE_ENV=development`) for development and `npm start` to run normally.
+  - Use `electron-reload` only in development; do not include reload logic in production builds.

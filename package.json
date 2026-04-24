@@ -1,0 +1,110 @@
+{
+  "name": "bella-paes-app",
+  "version": "1.0.0",
+  "description": "Sistema de controle de gastos simples",
+  "homepage": "https://github.com/luanfreitas8779/ControleDeGastosElectron#readme",
+  "bugs": {
+    "url": "https://github.com/luanfreitas8779/ControleDeGastosElectron/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luanfreitas8779/ControleDeGastosElectron.git"
+  },
+  "license": "MIT",
+  "author": "Luan Barros Freitas",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "dev": "cross-env NODE_ENV=development electron .",
+    "test": "jest",
+    "seed": "electron seed.js",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "dist": "electron-builder --win"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.11.1",
+    "@electron-forge/maker-deb": "^7.11.1",
+    "@electron-forge/maker-rpm": "^7.11.1",
+    "@electron-forge/maker-squirrel": "^7.11.1",
+    "@electron-forge/maker-zip": "^7.11.1",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.11.1",
+    "@electron-forge/plugin-fuses": "^7.11.1",
+    "@electron/fuses": "^1.8.0",
+    "cross-env": "^10.1.0",
+    "electron": "^40.6.1",
+    "electron-builder": "^26.8.1",
+    "electron-rebuild": "^3.2.9",
+    "electron-reload": "^2.0.0-alpha.1",
+    "javascript-obfuscator": "^5.4.1",
+    "jest": "^30.3.0"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "better-sqlite3": "^12.6.2",
+    "chart.js": "^4.5.1",
+    "electron-squirrel-startup": "^1.0.1"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "name": "Bella Pães",
+        "executableName": "bella-paes-app",
+        "icon": "./frontend/assets/icon-app",
+        "asar": true
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "bella_paes_app",
+            "authors": "Luan Barros Freitas",
+            "description": "Sistema de controle de gastos Bella Pães",
+            "setupIcon": "./frontend/assets/icon-app.ico",
+            "setupExe": "BellaPaes-Setup.exe",
+            "createDesktopShortcut": true,
+            "createStartMenuShortcut": true,
+            "shortcutName": "Bella Pães"
+          }
+        }
+      ]
+    }
+  },
+  "build": {
+    "appId": "com.bellapaes.app",
+    "productName": "Bella Pães",
+    "files": [
+      "main.js",
+      "preload.js",
+      "session.js",
+      "frontend/**/*",
+      "controllers/**/*",
+      "database/**/*",
+      "helpers/**/*",
+      "ipc/**/*",
+      "middlewares/**/*",
+      "models/**/*",
+      "services/**/*",
+      "package.json"
+    ],
+    "extraResources": [],
+    "win": {
+      "target": "nsis",
+      "icon": "./frontend/assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Bella Pães",
+      "installerIcon": "./frontend/assets/icon.ico",
+      "installerHeaderIcon": "./frontend/assets/icon.ico"
+    }
+  }
+}

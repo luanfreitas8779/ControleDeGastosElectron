@@ -1,0 +1,93 @@
+<div class="dashboard">
+    <!-- Cabeçalho do dashboard -->
+    <div id="div-top">
+        <div class="left-container-dashboard">
+            <h1>Dashboard</h1>
+            <p id="resumo-periodo-dashboard">Resumo dos últimos 30 dias</p>
+        </div>
+        <div class="selecao-calendarios">
+                <input id="data-inicio" type="date">
+                <span>até</span>
+                <input id="data-fim" type="date">
+                <button type="button" id="btn-filtrar-dashboard">Filtrar</button>
+         </div>
+    </div>
+
+    <!--Cards resumo dashboard-->
+    <div class="card-resumo">
+        <!--Card de Total de Vendas-->
+        <div class="total-vendas-dashboard-card">
+            <div class="icon-venda-dashboard">
+                <img src="./assets/venda-icon.svg" alt="">
+            </div>
+            <div class="info-venda-dashboard">
+                <h4>Total de Vendas</h4>
+                <p id="card-total-venda-dashboard"></p>
+            </div>
+        </div>
+        
+        <!--Card de Total de Gastos-->
+        <div class="total-gastos">
+            <div class="icon-total-gasto-dashboard">
+                <img src="./assets/gasto-icon.svg" alt="">
+            </div>
+            <div class="info-total-gasto-dashboard">
+                <h4>Total de Gastos</h4>
+                <p id="card-total-gasto-dashboard"></p>
+            </div>
+        </div>
+        <!--Card de Saldo do Período-->
+        <div class="saldo-periodo">
+            <div class="icon-saldo-periodo-dashboard">
+                <img src="./assets/saldo-periodo-icon.svg">
+            </div>
+            <div class="info-saldo-periodo-dashboard">
+                <h4>Saldo do Período</h4>
+                <p id="card-saldo-periodo-dashboard"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráficos do dashboard-->
+    <div class="graficos-dashboard">
+        <!--Gráfico de Evolução das Vendas-->
+        <div class="evolucao-vendas-dashboard">
+            <div class="graph-title-dashboard">
+                <h3>Evolução das Vendas</h3>
+            </div>
+            <div class="graph-evolucao-venda">
+                <canvas id="graph-pizza-dashboard"></canvas>
+            </div>
+        </div>
+
+        <!--Gráfico de pizza-->
+        <div class="gastos-por-categorias"> 
+            <div class="graph-title-dashboard">
+                <h3>Gastos por Categorias</h3>
+            </div>
+            <div class="graph-gastos-categorias">
+                <canvas id="gastosPorCategoriasChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!--Tabela com lista dos ultimos lançamentos-->
+    <div class="ultimos-lancamentos">
+        <h3>Últimos Lançamentos</h3>
+        <div class="tabela-ultimos-lancamentos">
+            <table class="tabela-dashboard-ultimos-lancamentos">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Tipo</th>
+                        <th>Descrição</th>
+                        <th>Categoria</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-dashboard-body">
+                                        
+                </tbody>
+            </table>
+    </div>
+</div>

@@ -1,0 +1,112 @@
+<div class="gastos">
+
+    <!--Cabeçalho e filtro de gastos-->
+    <div class="cabecalho">
+        <div class="titulo-gastos">
+            <h1>Gastos</h1>
+        </div>
+        <div class="filtro-gastos">
+            <input type="date" id="data-inicio-tela-gastos">
+            <span>até</span>
+            <input type="date" id="data-fim-tela-gastos">
+            <button type="button" id="btn-filtrar-gastos">Filtrar</button>
+        </div>
+    </div>
+    <!--FIM CABEÇALHO E FILTRO DE GASTOS-->
+
+    <!-- SEÇÃO DOS CARDS DA TELA DE GASTOS-->
+    <div class="cards-gastos">
+
+        <div class="card-gasto-fixo">
+            <div class="icone-card-gasto-fixo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                    class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                    <path
+                        d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9" />
+                    <path fill-rule="evenodd"
+                        d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5 5 0 0 0 7.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z" />
+                </svg>
+            </div>
+            <div class="informacoes-card-gasto-fixo">
+                <h4>FIXOS</h4>
+                <span id="card-gastos-fixos-tela-gastos">R$ 0.00</span>
+            </div>
+        </div>
+
+        <div class="card-gasto-variavel">
+            <div class="icone-card-gasto-variavel">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                    class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 0h1v15h15v1H0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5" />
+                </svg>
+            </div>
+            <div class="informacoes-card-gasto-variavel">
+                <h4>VARIAVEIS</h4>
+                <span id="card-gastos-variaveis-tela-gastos">R$ 0.00</span>
+            </div>
+        </div>
+
+        <div class="card-gasto-total">
+            <div class="icone-card-gasto-total">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                    class="bi bi-cash-stack" viewBox="0 0 16 16">
+                    <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
+                    <path
+                        d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2z" />
+                </svg>
+            </div>
+            <div class="info-card-total-gastos">
+                <h4>TOTAL DE GASTOS</h4>
+                <span id="card-gasto-total-tela-gastos">R$ 0.00</span>
+            </div>
+        </div>
+    </div>
+    <!--FIM SEÇÃO DOS CARDS DA TELA DE GASTOS-->
+
+    <!--INICIO SEÇÃO DOS GRÁFICOS-->
+    <div class="area-dos-graficos">
+        <div class="espaco-do-grafico-de-linhas">
+            <div class="titulo-do-grafico-de-linhas">
+                <h4>Evolução dos gastos mensal</h4>
+            </div>
+
+            <div class="grafico-linha-tela-gastos-div">
+                <canvas id="grafico-linha-tela-gastos"></canvas>
+            </div>
+        </div>
+
+        <div class="espaco-do-grafico-de-pizza">
+            <div class="titulo-do-grafico-de-pizza">
+                <h4>Gastos fixos e variáveis do período</h4>
+            </div>
+
+            <div class="grafico-pizza-tela-gastos-div">
+                <canvas id="grafico-pizza-tela-gastos"></canvas>
+            </div>
+        </div>
+    </div>
+    <!--FIM SEÇÃO DOS GRÁFICOS-->
+
+    <!-- INICIO DA TABELA-->
+    <div class="tabela-lista-gastos-tela-gastos">
+        <h3>Lista de gastos registrados no período</h3>
+        <div class="div-da-tabela">
+            <table class="tabela-de-gastos-tela-de-gastos">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Tipo</th>
+                        <th>Descrição</th>
+                        <th>Categoria</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-dashboard-body">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- FIM DA TABELA -->
+</div>

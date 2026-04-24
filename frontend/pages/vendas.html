@@ -1,0 +1,112 @@
+<div class="vendas">
+    <!--Cabeçalho da tela de vendas-->
+    <div class="cabecalho-vendas">
+        <!--Titulo da página-->
+        <div class="titulo-pagina-vendas">
+            <h1>Vendas</h1>
+        </div>
+        <!--Inputs de filtrar vendas por data-->
+        <div class="filtro-area-vendas">
+            <input type="date" id="data-inicio">
+            <span>até</span>
+            <input type="date" id="data-fim">
+            <button type="button" id="button-filtrar-periodo-vendas">Filtrar</button>
+        </div>
+    </div>
+
+    <!--Area dos cards de vendas-->
+    <div class="area-cards-vendas">
+
+        <!--Card Total de vendas-->
+        <div class="card-total-vendas">
+            <div class="icone-card-total-vendas">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-trending-up-icon lucide-trending-up">
+                    <path d="M16 7h6v6" />
+                    <path d="m22 7-8.5 8.5-5-5L2 17" />
+                </svg>
+            </div>
+            <div class="info-card-total-vendas">
+                <h4>Total de vendas</h4>
+                <span id="valor-total-vendas-card">R$ 0.00</span>
+            </div>
+        </div>
+
+        <!--Card Média diária-->
+        <div class="card-media-diaria">
+            <div class="icone-card-media-diaria">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-chart-no-axes-combined-icon lucide-chart-no-axes-combined">
+                    <path d="M12 16v5" />
+                    <path d="M16 14v7" />
+                    <path d="M20 10v11" />
+                    <path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15" />
+                    <path d="M4 18v3" />
+                    <path d="M8 14v7" />
+                </svg>
+            </div>
+            <div class="info-card-media-diaria">
+                <h4>Média diária</h4>
+                <span id="valor-media-diaria">R$ 0.00</span>
+            </div>
+
+        </div>
+
+        <!--Card Melhor dia de venda-->
+        <div class="card-melhor-dia">
+            <div class="icone-card-melhor-dia">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-banknote-arrow-up-icon lucide-banknote-arrow-up">
+                    <path d="M12 18H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5" />
+                    <path d="M18 12h.01" />
+                    <path d="M19 22v-6" />
+                    <path d="m22 19-3-3-3 3" />
+                    <path d="M6 12h.01" />
+                    <circle cx="12" cy="12" r="2" />
+                </svg>
+            </div>
+            <div class="info-card-melhor-dia">
+                <h4>Melhor dia de venda</h4>
+                <span id="valor-do-melhor-dia">R$ 0.00</span>
+                <span id="data-melhor-dia">31/12/2026</span>
+            </div>
+        </div>
+    </div>
+
+    <!--Area do gráfico-->
+    <div class="area-grafico-vendas">
+        <!--Div do título do gráfico-->
+        <div class="titulo-grafico-de-linhas-vendas">
+            <h4>Evolução das vendas</h4>
+        </div>
+        <!--Gráfico de linhas-->
+        <div class="grafico-linhas-vendas">
+            <canvas id="gráfico-de-linha-area-de-vendas"></canvas>
+        </div>
+    </div>
+
+    <div class="area-da-tabela-vendas-periodo">
+        <h3>Tabela dos lançamentos do período</h4>
+        <!--Tabela dos lançamentos do periodo-->
+        <div class="tabela-dos-lancamentos-periodo">
+            <table id="tabela-vendas-periodo">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Tipo</th>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tabela-vendas-periodo-body">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bella Pães — Preview</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    :root {
+      --bg:#F7F6F3; --bg-card:#FFFFFF; --bg-hover:#F0EDE8;
+      --texto:#1A1814; --texto-suave:#7A7670; --texto-placeholder:#B0ADA8;
+      --borda:#E8E4DE; --borda-forte:#D0CBC2;
+      --verde:#2D7D52; --verde-bg:#EAF4EE;
+      --vermelho:#C0392B; --vermelho-bg:#FCECEA;
+      --azul:#2962A8; --azul-bg:#EAF0FA;
+      --laranja:#C97020; --laranja-bg:#FDF3E7;
+      --menu-w:230px; --radius:10px; --radius-sm:6px;
+      --sombra:0 1px 4px rgba(0,0,0,0.07),0 4px 16px rgba(0,0,0,0.04);
+      --sombra-hover:0 2px 8px rgba(0,0,0,0.10),0 8px 24px rgba(0,0,0,0.07);
+      --fonte:'Sora',sans-serif; --fonte-mono:'JetBrains Mono',monospace;
+      --transition:all 0.18s ease;
+    }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html,body{height:100%;font-family:var(--fonte);background:var(--bg);color:var(--texto);font-size:14px;-webkit-font-smoothing:antialiased;}
+
+    body{display:flex;height:100vh;overflow:hidden;}
+
+    /* MENU */
+    #menu{width:var(--menu-w);min-width:var(--menu-w);background:var(--bg-card);border-right:1px solid var(--borda);display:flex;flex-direction:column;padding:24px 0 16px;gap:8px;}
+    .menu-logo{padding:0 20px 20px;border-bottom:1px solid var(--borda);margin-bottom:8px;}
+    .menu-logo-nome{font-size:16px;font-weight:700;color:var(--texto);letter-spacing:-0.3px;}
+    .menu-logo-sub{font-size:11px;color:var(--texto-suave);font-weight:400;margin-top:2px;}
+    #menu ul{list-style:none;flex:1;padding:0 12px;display:flex;flex-direction:column;gap:2px;}
+    #menu ul li a{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--radius-sm);color:var(--texto-suave);text-decoration:none;font-size:13px;font-weight:500;transition:var(--transition);}
+    #menu ul li a:hover{background:var(--bg-hover);color:var(--texto);}
+    #menu ul li a.ativo{background:var(--texto);color:#fff;}
+    .menu-icone{font-size:15px;width:18px;text-align:center;}
+    #menu-usuario{padding:12px 20px;border-top:1px solid var(--borda);margin-top:auto;}
+    .menu-usuario-nome{font-size:12px;font-weight:600;color:var(--texto);}
+    .menu-usuario-perfil{font-size:11px;color:var(--texto-suave);}
+    #btnLogout{margin:8px 12px 0;width:calc(100% - 24px);padding:8px;border:1px solid var(--borda-forte);border-radius:var(--radius-sm);background:transparent;color:var(--texto-suave);font-family:var(--fonte);font-size:12px;font-weight:500;cursor:pointer;transition:var(--transition);}
+    #btnLogout:hover{background:var(--vermelho-bg);border-color:var(--vermelho);color:var(--vermelho);}
+
+    /* CONTEÚDO */
+    #conteudo{flex:1;overflow-y:auto;padding:32px;background:var(--bg);}
+    #conteudo::-webkit-scrollbar{width:5px;}
+    #conteudo::-webkit-scrollbar-track{background:transparent;}
+    #conteudo::-webkit-scrollbar-thumb{background:var(--borda-forte);border-radius:99px;}
+
+    /* DASHBOARD */
+    .dashboard{display:flex;flex-direction:column;gap:24px;}
+    .dash-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+    .dash-titulo{font-size:22px;font-weight:700;letter-spacing:-0.5px;}
+    .dash-subtitulo{font-size:12px;color:var(--texto-suave);margin-top:2px;}
+    .dash-filtro{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+    .dash-filtro-sep{font-size:12px;color:var(--texto-suave);}
+    .input-data{padding:8px 10px;border:1px solid var(--borda);border-radius:var(--radius-sm);background:var(--bg-card);font-family:var(--fonte);font-size:12px;color:var(--texto);outline:none;transition:var(--transition);}
+    .input-data:focus{border-color:var(--texto);}
+    .btn-filtrar{padding:8px 14px;background:var(--texto);color:#fff;border:none;border-radius:var(--radius-sm);font-family:var(--fonte);font-size:12px;font-weight:600;cursor:pointer;transition:var(--transition);}
+    .btn-filtrar:hover{background:#333;}
+
+    /* CARDS */
+    .dash-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+    .card{background:var(--bg-card);border:1px solid var(--borda);border-radius:var(--radius);padding:20px;display:flex;align-items:center;gap:14px;box-shadow:var(--sombra);transition:var(--transition);}
+    .card:hover{box-shadow:var(--sombra-hover);transform:translateY(-1px);}
+    .card-icone{width:40px;height:40px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;flex-shrink:0;}
+    .card-vendas .card-icone{background:var(--verde-bg);color:var(--verde);}
+    .card-gastos .card-icone{background:var(--vermelho-bg);color:var(--vermelho);}
+    .card-saldo .card-icone{background:var(--azul-bg);color:var(--azul);}
+    .card-lancamentos .card-icone{background:var(--laranja-bg);color:var(--laranja);}
+    .card-info{display:flex;flex-direction:column;gap:2px;min-width:0;}
+    .card-label{font-size:11px;font-weight:600;color:var(--texto-suave);text-transform:uppercase;letter-spacing:0.5px;}
+    .card-valor{font-family:var(--fonte-mono);font-size:18px;font-weight:500;color:var(--texto);letter-spacing:-0.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+    /* GRÁFICOS */
+    .dash-graficos{display:grid;grid-template-columns:1fr 340px;gap:16px;}
+    .grafico-box{background:var(--bg-card);border:1px solid var(--borda);border-radius:var(--radius);padding:20px;box-shadow:var(--sombra);}
+    .grafico-titulo-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+    .grafico-titulo{font-size:13px;font-weight:600;color:var(--texto);}
+    .grafico-area{position:relative;height:220px;}
+    .grafico-area-pizza{height:220px;display:flex;align-items:center;justify-content:center;}
+
+    /* TABELA */
+    .dash-lancamentos{background:var(--bg-card);border:1px solid var(--borda);border-radius:var(--radius);box-shadow:var(--sombra);overflow:hidden;}
+    .lancamentos-header{padding:16px 20px;border-bottom:1px solid var(--borda);}
+    .tabela-lancamentos{width:100%;border-collapse:collapse;}
+    .tabela-lancamentos thead tr{background:var(--bg);}
+    .tabela-lancamentos th{padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--texto-suave);text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid var(--borda);}
+    .tabela-lancamentos td{padding:12px 16px;font-size:13px;color:var(--texto);border-bottom:1px solid var(--borda);}
+    .tabela-lancamentos tbody tr:last-child td{border-bottom:none;}
+    .tabela-lancamentos tbody tr:hover{background:var(--bg);}
+    .tabela-lancamentos td:first-child{font-family:var(--fonte-mono);font-size:12px;color:var(--texto-suave);}
+    .valor-positivo{font-family:var(--fonte-mono);font-weight:500;color:var(--verde)!important;}
+    .valor-negativo{font-family:var(--fonte-mono);font-weight:500;color:var(--vermelho)!important;}
+    .badge{display:inline-block;padding:3px 8px;border-radius:99px;font-size:11px;font-weight:600;letter-spacing:0.2px;}
+    .badge-venda{background:var(--verde-bg);color:var(--verde);}
+    .badge-gasto{background:var(--vermelho-bg);color:var(--vermelho);}
+  </style>
+</head>
+<body>
+
+  <!-- MENU -->
+  <nav id="menu">
+    <div class="menu-logo">
+      <div class="menu-logo-nome">🍞 Bella Pães</div>
+      <div class="menu-logo-sub">Controle de Caixa</div>
+    </div>
+    <ul>
+      <li><a href="#" class="ativo"><span class="menu-icone">▦</span> Dashboard</a></li>
+      <li><a href="#"><span class="menu-icone">↓</span> Gastos</a></li>
+      <li><a href="#"><span class="menu-icone">↑</span> Vendas</a></li>
+      <li><a href="#"><span class="menu-icone">↻</span> Recorrentes</a></li>
+      <li><a href="#"><span class="menu-icone">◎</span> Relatórios</a></li>
+      <li><a href="#"><span class="menu-icone">◉</span> Usuários</a></li>
+    </ul>
+    <div id="menu-usuario">
+      <div class="menu-usuario-nome">Administrador</div>
+      <div class="menu-usuario-perfil">admin</div>
+    </div>
+    <button id="btnLogout">Sair</button>
+  </nav>
+
+  <!-- CONTEÚDO -->
+  <main id="conteudo">
+    <div class="dashboard">
+
+      <div class="dash-header">
+        <div>
+          <h1 class="dash-titulo">Dashboard</h1>
+          <p class="dash-subtitulo">Visão geral dos últimos 30 dias</p>
+        </div>
+        <div class="dash-filtro">
+          <input type="date" class="input-data" id="dataInicio" />
+          <span class="dash-filtro-sep">até</span>
+          <input type="date" class="input-data" id="dataFim" />
+          <button class="btn-filtrar">Filtrar</button>
+        </div>
+      </div>
+
+      <div class="dash-cards">
+        <div class="card card-vendas">
+          <div class="card-icone">↑</div>
+          <div class="card-info">
+            <span class="card-label">Total de Vendas</span>
+            <span class="card-valor">R$ 28.450,00</span>
+          </div>
+        </div>
+        <div class="card card-gastos">
+          <div class="card-icone">↓</div>
+          <div class="card-info">
+            <span class="card-label">Total de Gastos</span>
+            <span class="card-valor">R$ 12.830,00</span>
+          </div>
+        </div>
+        <div class="card card-saldo">
+          <div class="card-icone">$</div>
+          <div class="card-info">
+            <span class="card-label">Saldo do Período</span>
+            <span class="card-valor">R$ 15.620,00</span>
+          </div>
+        </div>
+        <div class="card card-lancamentos">
+          <div class="card-icone">#</div>
+          <div class="card-info">
+            <span class="card-label">Lançamentos</span>
+            <span class="card-valor">47</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash-graficos">
+        <div class="grafico-box">
+          <div class="grafico-titulo-row">
+            <span class="grafico-titulo">Evolução de Vendas</span>
+          </div>
+          <div class="grafico-area">
+            <canvas id="graficoVendas"></canvas>
+          </div>
+        </div>
+        <div class="grafico-box">
+          <div class="grafico-titulo-row">
+            <span class="grafico-titulo">Gastos por Categoria</span>
+          </div>
+          <div class="grafico-area grafico-area-pizza">
+            <canvas id="graficoCategorias"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash-lancamentos">
+        <div class="lancamentos-header">
+          <span class="grafico-titulo">Últimos Lançamentos</span>
+        </div>
+        <table class="tabela-lancamentos">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Tipo</th>
+              <th>Descrição</th>
+              <th>Categoria</th>
+              <th>Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>06/03/2026</td>
+              <td><span class="badge badge-venda">Venda</span></td>
+              <td>Fechamento do dia</td>
+              <td>—</td>
+              <td class="valor-positivo">R$ 1.240,00</td>
+            </tr>
+            <tr>
+              <td>06/03/2026</td>
+              <td><span class="badge badge-gasto">Gasto</span></td>
+              <td>Compra de farinha</td>
+              <td>Insumos</td>
+              <td class="valor-negativo">R$ 180,00</td>
+            </tr>
+            <tr>
+              <td>05/03/2026</td>
+              <td><span class="badge badge-venda">Venda</span></td>
+              <td>Fechamento do dia</td>
+              <td>—</td>
+              <td class="valor-positivo">R$ 980,00</td>
+            </tr>
+            <tr>
+              <td>05/03/2026</td>
+              <td><span class="badge badge-gasto">Gasto</span></td>
+              <td>Conta de luz</td>
+              <td>Fixos</td>
+              <td class="valor-negativo">R$ 320,00</td>
+            </tr>
+            <tr>
+              <td>04/03/2026</td>
+              <td><span class="badge badge-gasto">Gasto</span></td>
+              <td>Embalagens</td>
+              <td>Insumos</td>
+              <td class="valor-negativo">R$ 95,00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    // gráfico de linha — evolução de vendas
+    new Chart(document.getElementById('graficoVendas'), {
+      type: 'line',
+      data: {
+        labels: ['05/02','08/02','11/02','14/02','17/02','20/02','23/02','26/02','01/03','04/03','06/03'],
+        datasets: [{
+          label: 'Vendas',
+          data: [820, 950, 780, 1100, 890, 1240, 960, 1050, 1180, 980, 1240],
+          borderColor: '#2D7D52',
+          backgroundColor: 'rgba(45,125,82,0.08)',
+          borderWidth: 2,
+          pointBackgroundColor: '#2D7D52',
+          pointRadius: 3,
+          pointHoverRadius: 5,
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { color: '#E8E4DE' }, ticks: { font: { family: 'JetBrains Mono', size: 10 }, color: '#7A7670' } },
+          y: { grid: { color: '#E8E4DE' }, ticks: { font: { family: 'JetBrains Mono', size: 10 }, color: '#7A7670', callback: v => 'R$' + v } }
+        }
+      }
+    })
+
+    // gráfico de pizza — gastos por categoria
+    new Chart(document.getElementById('graficoCategorias'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Insumos', 'Fixos', 'Fornecedores', 'Outros'],
+        datasets: [{
+          data: [42, 28, 20, 10],
+          backgroundColor: ['#2D7D52', '#2962A8', '#C97020', '#B0ADA8'],
+          borderWidth: 0,
+          hoverOffset: 6
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        cutout: '68%',
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: { font: { family: 'Sora', size: 11 }, color: '#1A1814', padding: 14, usePointStyle: true, pointStyleWidth: 8 }
+          }
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>

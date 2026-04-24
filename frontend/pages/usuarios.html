@@ -1,0 +1,93 @@
+<div class="usuarios">
+
+    <div class="usuarios-cabecalho">
+        <div class="container-titulo">
+            <h1>Usuários</h1>
+            <p>Gerencie os acessos e permissões da equipe</p>
+        </div>
+        <div class="container-botao">
+            <button type="button" id="btn-novo-usuario">+ Novo Usuário</button>
+        </div>
+    </div>
+    <div class="container-tabela">
+        <h3>Lista de usuários</h3>
+        <div class="div-da-tabela">
+            <table class="tabela-usuarios">
+                <thead>
+                    <tr>
+                        <th>Login</th>
+                        <th>Tipo</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-usuarios-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal de novo usuário -->
+    <div class="usuario-modal-overlay" id="modal-novo-usuario">
+        <div class="usuario-modal-conteudo">
+            <div class="usuario-modal-titulo">
+                <h2>Novo Usuário</h2>
+            </div>
+            <div class="usuario-modal-formulario">
+                <label for="novo-usuario-login">Login</label>
+                <input type="text" id="novo-usuario-login" placeholder="Digite o login do usuário">
+                <label for="novo-usuario-senha">Senha</label>
+                <input type="password" id="novo-usuario-senha" placeholder="Digite a senha do usuário">
+                <label for="novo-usuario-confirmar-senha">Confirmar Senha</label>
+                <input type="password" id="novo-usuario-confirmar-senha" placeholder="Confirme a senha do usuário">
+                <div class="usuario-modal-botoes">
+                    <button type="button" id="btn-cancelar-usuario">Cancelar</button>
+                    <button type="button" id="btn-salvar-usuario">Criar Usuário</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de alteração de senha -->
+    <div class="usuario-modal-overlay" id="modal-alterar-senha">
+        <div class="usuario-modal-conteudo">
+            <h2>Alterar Senha</h2>
+            <p id="texto-usuario-selecionado-senha"></p>
+            <div class="usuario-modal-formulario">
+                <label for="alterar-usuario-senha">Nova Senha</label>
+                <input type="password" id="alterar-usuario-senha" placeholder="Digite a nova senha">
+                <label for="alterar-usuario-confirmar-senha">Confirmar Nova Senha</label>
+                <input type="password" id="alterar-usuario-confirmar-senha" placeholder="Confirme a nova senha">
+                <div class="usuario-modal-botoes">
+                    <button type="button" id="btn-cancelar-senha">Cancelar</button>
+                    <button type="button" id="btn-salvar-senha">Alterar Senha</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmação -->
+    <div class="usuario-modal-overlay" id="modal-confirmar-exclusao">
+        <div class="usuario-modal-conteudo">
+            <h2>Confirmar exclusão</h2>
+            <p id="texto-confirmacao-exclusao"></p>
+            <div class="usuario-modal-botoes">
+                <button type="button" id="btn-cancelar-exclusao">Cancelar</button>
+                <button type="button" id="btn-confirmar-exclusao">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmação de permissão -->
+    <div class="usuario-modal-overlay" id="modal-confirmar-permissao">
+        <div class="usuario-modal-conteudo">
+            <h2>Confirmar alteração de permissão</h2>
+            <p id="texto-confirmacao-permissao"></p>
+            <div class="usuario-modal-botoes">
+                <button type="button" id="btn-cancelar-permissao">Cancelar</button>
+                <button type="button" id="btn-confirmar-permissao">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+
+</div>

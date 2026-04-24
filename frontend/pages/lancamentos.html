@@ -1,0 +1,201 @@
+<div class="adicionar">
+
+    <!--Cabeçalho-->
+    <div class="cabecalho-lancamentos">
+        <h1>Lançamentos</h1>
+        <p>Gerencie suas entradas e saídas diárias</p>
+    </div>
+
+    <!--Area dos cards de registros de vendas e gastos-->
+    <div class="area-lancamentos">
+
+        <!--Card de lançar venda-->
+        <div class="lancar-venda">
+
+            <div class="titulo-card-lanca-venda">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-chart-no-axes-combined-icon lucide-chart-no-axes-combined">
+                    <path d="M12 16v5" />
+                    <path d="M16 14v7" />
+                    <path d="M20 10v11" />
+                    <path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15" />
+                    <path d="M4 18v3" />
+                    <path d="M8 14v7" />
+                </svg>
+                <h4>Lançar Venda</h4>
+            </div>
+
+            <div class="container">
+                <div class="dados-da-venda">
+                    <div>
+                        <label for="data-venda">Data da venda</label>
+                        <input type="date" id="data-venda">
+                    </div>
+                    <div>
+                        <label for="valor-venda">Valor da venda</label>
+                        <input type="text" inputmode="numeric" placeholder="0,00" id="valor-venda">
+                    </div>
+                    <button type="button" id="btn-salvar-venda">Salvar Venda</button>
+                </div>
+            </div>
+        </div>
+
+        <!--Card de lançar gasto-->
+        <div class="lancar-gasto">
+
+            <div class="titulo-card-lanca-gasto">
+                <h4>Lançar Gasto</h4>
+            </div>
+            <div class="container">
+                <div class="dados-do-gasto">
+                    <label for="data-gasto">Data do gasto:</label>
+                    <input type="date" id="data-gasto">
+
+                    <label for="valor-gasto">Valor:</label>
+                    <input type="text" inputmo="numeric" placeholder="0,00" id="valor-gasto">
+
+                    <label for="descricao-gasto">Descrição:</label>
+                    <input type="text" placeholder="Descrição" id="descricao-gasto">
+                    <label for="input-fixo">Tipo:</label>
+                    <div>
+                        <input type="radio" name="fixo-variavel" value="Fixo" id="input-fixo" checked>
+                        <label for="input-fixo">Fixo</label>
+                        <input type="radio" name="fixo-variavel" value="Variavel" id="input-variavel">
+                        <label for="input-variavel">Variável</label>
+                    </div>
+                    <button type="button" id="btn-salvar-gasto">Salvar Gasto</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Tabela com lista dos ultimos lançamentos-->
+    <div class="ultimos-lancamentos-tela-lancamentos">
+        <div class="cabecalho-tabela">
+            <h3>Últimos Lançamentos</h3>
+            <div>
+                <input type="date" id="data-inicio">
+                <span>até</span>
+                <input type="date" id="data-fim">
+                <button type="button" id="btn-filtrar-tabela">Filtrar</button>
+            </div>
+        </div>
+        <div class="ultimos-lancamentos-tela-lancamentos">
+            <table class="tabela-ultimos-lancamentos-tela-lancamentos">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Tipo</th>
+                        <th>Descrição</th>
+                        <th>Categoria</th>
+                        <th>Valor</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-body">
+
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ================ CÓDIGO DOS MODAIS DE EDIÇÃO =================-->
+
+        <!-- Modal de Edição de Lançamento -->
+        <div id="modal-edicao" class="modal-overlay modal-escondido">
+            <div class="modal-container modal-edicao-container">
+                
+                <!-- Header do Modal -->
+                <div class="modal-header">
+                    <h2 class="modal-titulo">✏️ Editar Lançamento</h2>
+                    <button type="button" class="modal-fechar" id="btn-fechar-modal-edicao" aria-label="Fechar modal">✕</button>
+                </div>
+
+                <!-- Inputs Hidden -->
+                <input type="hidden" id="edit-id">
+                <input type="hidden" id="edit-tipo">
+
+                <!-- Corpo do Modal -->
+                <div class="modal-body">
+                    
+                    <!-- Seção de Campos Básicos -->
+                    <div class="modal-secao">
+                        <div class="modal-campo">
+                            <label for="edit-data" class="modal-label">📅 Data</label>
+                            <input type="date" id="edit-data" class="modal-input" required>
+                        </div>
+
+                        <div class="modal-campo">
+                            <label for="edit-valor" class="modal-label">💰 Valor</label>
+                            <input type="text" inputmode="numeric" placeholder="0,00" id="edit-valor" class="modal-input" required>
+                        </div>
+                    </div>
+
+                    <!-- Seção de Campos Específicos de Gasto -->
+                    <div id="campos-gasto" class="campos-escondidos">
+                        <div class="modal-secao-divisor"></div>
+                        <div class="modal-secao">
+                            <div class="modal-campo">
+                                <label for="edit-descricao" class="modal-label">📝 Descrição</label>
+                                <input type="text" id="edit-descricao" class="modal-input" placeholder="Digite uma descrição...">
+                            </div>
+
+                            <div class="modal-campo">
+                                <label class="modal-label">🏷️ Tipo de Gasto</label>
+                                <div class="modal-radio-group">
+                                    <label class="modal-radio-label">
+                                        <input type="radio" name="edit-fixo-variavel" value="Fixo" id="edit-fixo" class="modal-radio">
+                                        <span class="radio-custom"></span>
+                                        Fixo
+                                    </label>
+                                    <label class="modal-radio-label">
+                                        <input type="radio" name="edit-fixo-variavel" value="Variavel" id="edit-variavel" class="modal-radio">
+                                        <span class="radio-custom"></span>
+                                        Variável
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer com Botões -->
+                <div class="modal-footer">
+                    <button type="button" id="btn-cancelar-edicao" class="modal-btn modal-btn-cancelar">
+                        <span>Cancelar</span>
+                    </button>
+                    <button type="button" id="btn-salvar-edicao" class="modal-btn modal-btn-salvar">
+                        <span>💾 Salvar</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Modal de Confirmação de Exclusão -->
+        <div id="modal-confirmar-delete" class="modal-overlay modal-escondido">
+            <div class="modal-container modal-delete-container">
+                
+                <!-- Header -->
+                <div class="modal-header modal-header-alerta">
+                    <h2 class="modal-titulo">⚠️ Confirmar Exclusão</h2>
+                </div>
+
+                <!-- Corpo -->
+                <div class="modal-body">
+                    <p class="modal-mensagem-alerta">Tem certeza que deseja deletar este lançamento? Esta ação não pode ser desfeita.</p>
+                </div>
+
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button type="button" id="cancelar-delete-modal" class="modal-btn modal-btn-cancelar">
+                        Cancelar
+                    </button>
+                    <button type="button" id="confirm-delete-modal" class="modal-btn modal-btn-deletar">
+                        🗑️ Deletar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>

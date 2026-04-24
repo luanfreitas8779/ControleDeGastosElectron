@@ -1,0 +1,36 @@
+<div class="logs">
+    <div class="cabecalho-logs">
+        <h1>Registros de Alterações</h1>
+        <p>Histórico de modificações do sistema</p>
+    </div>
+
+
+
+    <!--Tabela com lista dos ultimos lançamentos-->
+    <div class="tabela-de-registros">
+        <div class="cabecalho-tabela">
+            <h3>Últimos registros</h3>
+            <div class="filtros">
+                <input type="date" id="data-inicio">
+                <input type="date" id="data-fim">
+                <button type="button" id="btn-filtrar-logs">Filtrar</button>
+            </div>
+        </div>
+        <div class="tabela-ultimos-lancamentos">
+            <table class="tabela-logs-ultimos-lancamentos">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Tipo</th>
+                        <th>Descrição</th>
+                        <th>Usuário</th>
+                        <th>Informações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-logs-body">
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
